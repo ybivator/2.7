@@ -1,1 +1,1 @@
-This programm creates and solves Labirinth
+This programm creates and solves Labyrinth
