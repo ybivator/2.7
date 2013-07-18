@@ -1,20 +1,30 @@
 #ifndef __LABYRINTH_H__
 #define __LABYRINTH_H__
 #include <Cell.h>
+#include <vector>
 
 class Labyrinth
 {
 public:
    Labyrinth(int topLeftX, int topLeftY,
-             unsigned int cellSize = 10);
-   
+             size_t rows, size_t cols,
+             size_t cellSize = 10);
+   ~Labyrinth();
+
    void drawLabyrinth() const;
+   void makeLabyrinth();
+   void cleanLabyrinth();
 
 private:
-   static const unsigned int m_rows = 5;
-   static const unsigned int m_cols = 5;
+   size_t m_rows;
+   size_t m_cols;
+   size_t m_size;
 
-   Cell m_cellArray[m_rows][m_cols];
+   Cell* m_cellArray;
+   std::vector<size_t> m_randArray;
+
+   size_t giveEmptyWalls(size_t i);
+   size_t giveRandomWall(size_t i);
 
 };
 

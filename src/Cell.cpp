@@ -1,3 +1,4 @@
+#include <cstdlib>
 #include <Cell.h>
 #include <GL/gl.h>
 #include <iostream>
@@ -5,10 +6,13 @@
 using std::cout;
 using std::endl;
 
-Cell::Cell(int x, int y, unsigned int cellSize):m_top(true), m_bottom(true),
-                                       m_left(true), m_right(true),
-	                               m_topLeftX(x), m_topLeftY(y),
-				       m_cellSize(cellSize)
+Cell::Cell(int x, int y, char value,
+           size_t cellSize):
+	                          m_top(true), m_bottom(true),
+                                  m_left(true), m_right(true),
+	                          m_topLeftX(x), m_topLeftY(y),
+				  m_value(value),
+				  m_cellSize(cellSize)
 {
 }
 
@@ -18,7 +22,7 @@ void Cell::setTopLeft(int x, int y)
    m_topLeftY = y;
 }
 
-void Cell::setCellSize(unsigned int size)
+void Cell::setCellSize(size_t size)
 {
    m_cellSize = size;
 }
@@ -79,4 +83,17 @@ void Cell::showCell() const
 {
    cout << "==========" << endl;
    cout << "x = " << m_topLeftX << " y = " << m_topLeftY << endl;
+}
+
+void Cell::setValue(char value)
+{
+   if(value == 0 || value == 1)
+   {
+      m_value = value;
+   }
+}
+
+char Cell::getValue() const
+{
+   return m_value;
 }

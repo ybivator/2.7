@@ -15,6 +15,7 @@ int main(int argc, char **argv)
    glutCreateWindow("Labyrinth");
    
    glutDisplayFunc(display);
+   glutKeyboardFunc(keyboard);
 
    myInit();
    glutMainLoop();
