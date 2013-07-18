@@ -183,124 +183,38 @@ size_t Labyrinth::giveRandomWall(size_t i)
    size_t randArray[4];
    size_t randIndex = 0;
    size_t emptyWall = giveEmptyWalls(i);
-   std::vector<size_t>::iterator it;
+
    if(emptyWall == 0)
    {
       return 0;
    }
-   else if(emptyWall < 2)
+
+   while(emptyWall != 0)
    {
-      randIndex = 1;
-      randArray[0] = 1;
-   }
-   else if(emptyWall < 4)
-   {
-      if((emptyWall - 2) == 1)
+      if(emptyWall < 2)
       {
-         randIndex = 2;
-         randArray[0] = 2;
-         randArray[1] = 1;
+         randArray[randIndex] = 1;
+	 emptyWall -= 1;
+      }
+      else if(emptyWall < 4)
+      {
+         randArray[randIndex] = 2;
+	 emptyWall -= 2;
+	 m_randArray.push_back(i);
+      }
+      else if(emptyWall < 8)
+      {
+         randArray[randIndex] = 4;
+	 emptyWall -= 4;
 	 m_randArray.push_back(i);
       }
       else
       {
-         randIndex = 1;
-         randArray[0] = 2;
-      }
-   }
-   else if(emptyWall < 8)
-   {
-      size_t tmp = emptyWall - 4;
-      if(tmp == 1)
-      {
-         randIndex = 2;
-         randArray[0] = 4;
-         randArray[1] = 1;
+         randArray[randIndex] = 8;
+	 emptyWall -= 8;
 	 m_randArray.push_back(i);
       }
-      else if(tmp == 2)
-      {
-         randIndex = 2;
-         randArray[0] = 4;
-         randArray[1] = 2;
-	 m_randArray.push_back(i);
-      }
-      else if(tmp == 3)
-      {
-         randIndex = 3;
-         randArray[0] = 4;
-         randArray[1] = 2;
-         randArray[2] = 1;
-	 m_randArray.push_back(i);
-      }
-      else
-      {
-         randIndex = 1;
-         randArray[0] = 4;
-      }
-   }
-   else
-   {
-      size_t tmp = emptyWall - 8;
-      if(tmp == 1)
-      {
-         randIndex = 2;
-         randArray[0] = 8;
-         randArray[1] = 1;
-	 m_randArray.push_back(i);
-      }
-      else if(tmp == 2)
-      {
-         randIndex = 2;
-         randArray[0] = 8;
-         randArray[1] = 2;
-	 m_randArray.push_back(i);
-      }
-      else if(tmp == 3)
-      {
-         randIndex = 3;
-         randArray[0] = 8;
-         randArray[1] = 2;
-         randArray[2] = 1;
-	 m_randArray.push_back(i);
-      }
-      else if(tmp == 4)
-      {
-         randIndex = 2;
-         randArray[0] = 8;
-         randArray[1] = 4;
-	 m_randArray.push_back(i);
-      }
-      else if(tmp == 5)
-      {
-         randIndex = 3;
-         randArray[0] = 8;
-         randArray[1] = 4;
-         randArray[2] = 1;
-	 m_randArray.push_back(i);
-      }
-      else if(tmp == 6)
-      {
-         randIndex = 3;
-         randArray[0] = 8;
-         randArray[1] = 4;
-         randArray[2] = 2;
-	 m_randArray.push_back(i);
-      }
-      else if(tmp == 7)
-      {
-         randIndex = 4;
-         randArray[0] = 8;
-         randArray[1] = 4;
-         randArray[2] = 2;
-         randArray[3] = 1;
-	 m_randArray.push_back(i);
-      }
-      else
-      {
-         randIndex = 1;
-         randArray[0] = 8;
-      }
+      randIndex++;
    }
    size_t ind = rand() % randIndex;
    return randArray[ind];
